@@ -88,9 +88,9 @@ class Parsing_Pose_PC(Dataset):
         # list_all_label = []  # body label
         # list_all_key2 = []  # joint  point
         if platform.system() == 'Linux':
-            root_dir = "/home/shiruili/"
+            root_dir = "."
         else:
-            root_dir = r"C:\Users\83723\Downloads\LF-PCT\Point Cloud_add_all"
+            root_dir = r"."
 
         list_all_ti = np.load(os.path.join(root_dir,r"npyData/train/list_all_ti.npy"))
         list_all_label = np.load(os.path.join(root_dir,r"npyData/train/list_all_label.npy"))
@@ -110,9 +110,9 @@ class Parsing_Pose_PC(Dataset):
 
     def dataRead1(self):
         if platform.system() == 'Linux':
-            root_dir = "/home/shiruili/"
+            root_dir = "."
         else:
-            root_dir = r"C:\Users\83723\Downloads\LF-PCT\Point Cloud_add_all"
+            root_dir = r"."
 
         list_all_ti = np.load(os.path.join(root_dir,r"npyData/test/list_all_ti.npy"))
         list_all_label = np.load(os.path.join(root_dir,r"npyData/test/list_all_label.npy"))

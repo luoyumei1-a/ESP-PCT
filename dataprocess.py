@@ -48,7 +48,7 @@ def get_bounding_box(points):
 list_all_ti = []  # ti数据
 list_all_label = []  # body label
 list_all_key2 = []  # joint point
-rootdir = r"C:\Users\83723\Downloads\LF-PCT\Point Cloud_add_all\matData"
+rootdir = r".\matData"
 Keyboard = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9']
 Repect = ['0','1','2','3','4','5','6']
 
@@ -202,6 +202,6 @@ print(list_all_ti.shape)
 print(list_all_label.shape)
 print(list_all_key2.shape)
 
-np.save(os.path.join(r"C:\Users\83723\Downloads\LF-PCT\Point Cloud_add_all\npydata\train","list_all_ti"),list_all_ti)
-np.save(os.path.join(r"C:\Users\83723\Downloads\LF-PCT\Point Cloud_add_all\npydata\train","list_all_label"),list_all_label)
-np.save(os.path.join(r"C:\Users\83723\Downloads\LF-PCT\Point Cloud_add_all\npydata\train","list_all_key2"),list_all_key2)
+np.save(os.path.join(r".\npydata\train","list_all_ti"),list_all_ti)
+np.save(os.path.join(r".\npydata\train","list_all_label"),list_all_label)
+np.save(os.path.join(r".\npydata\train","list_all_key2"),list_all_key2)

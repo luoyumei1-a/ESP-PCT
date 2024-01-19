@@ -42,8 +42,8 @@ def train_model(num_epochs, learning_rate, batchsize):
     early_stop_patience = 200  # 如果连续多少个epoch验证性能不提升，就停止训练
     best_validation_loss = float('inf')  # 初始化最佳验证集损失值
     counter = 0  # 用于计数连续多少个epoch验证性能没有提升
-    writer1 = SummaryWriter(r'C:\Users\83723\Downloads\LF-PCT\Point Cloud_add_all\logs')
-    path = r"C:\Users\83723\Downloads\LF-PCT\Point Cloud_add_all\models"
+    writer1 = SummaryWriter(r'.\logs')
+    path = r".\models"
     import os
 
     if not os.path.exists(path):
@@ -59,7 +59,7 @@ def train_model(num_epochs, learning_rate, batchsize):
     test_loader = DataLoader(test_data, batch_size=batchsize, shuffle=True, drop_last=True, num_workers=5)
 
     # 如果有保存的模型，则加载模型，并在其基础上继续训练
-    modelLast = r'C:\Users\83723\Downloads\LF-PCT\Point Cloud_add_all\models\model_599.pth'
+    modelLast = r'.\models\model_599.pth'
     if os.path.exists(modelLast):
         # checkpoint = torch.load(modelLast)
         # model.load_state_dict(checkpoint['model'])
