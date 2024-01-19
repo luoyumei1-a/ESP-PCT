@@ -22,7 +22,7 @@ from thop import clever_format
 np.set_printoptions(threshold=sys.maxsize)
 
 os.environ["PYDEVD_DISABLE_FILE_VALIDATION"] = "1"
-# 定义类别名称
+# keystrokes name
 class_names = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9']         
 
 def train_model(num_epochs, learning_rate, batchsize):
@@ -39,9 +39,9 @@ def train_model(num_epochs, learning_rate, batchsize):
     # batchsize = 16
     length_size = 25
     num_class = 36
-    early_stop_patience = 200  # 如果连续多少个epoch验证性能不提升，就停止训练
-    best_validation_loss = float('inf')  # 初始化最佳验证集损失值
-    counter = 0  # 用于计数连续多少个epoch验证性能没有提升
+    early_stop_patience = 200  # The number of consecutive epochs without performance improvement on the validation set after which training will be stopped
+    best_validation_loss = float('inf')  # Initialize the best validation loss value
+    counter = 0  # Counter for the number of consecutive epochs without performance improvement
     writer1 = SummaryWriter(r'.\logs')
     path = r".\models"
     import os
@@ -58,7 +58,7 @@ def train_model(num_epochs, learning_rate, batchsize):
     test_data = Parsing_Pose_PC(train=False)
     test_loader = DataLoader(test_data, batch_size=batchsize, shuffle=True, drop_last=True, num_workers=5)
 
-    # 如果有保存的模型，则加载模型，并在其基础上继续训练
+    # If a saved model exists, load the model and continue training from there
     modelLast = r'.\models\model_599.pth'
     if os.path.exists(modelLast):
         # checkpoint = torch.load(modelLast)
@@ -123,7 +123,7 @@ def train_model(num_epochs, learning_rate, batchsize):
         model.eval()
         eval_loss = []
         eval_classify_accu = []
-        # 定义两个空列表，用于存储所有的预测标签和真实标签
+        # Define two empty lists to store all predicted labels and true labels
         all_pred = []
         all_true = []
         with torch.no_grad():
@@ -149,25 +149,23 @@ def train_model(num_epochs, learning_rate, batchsize):
                 correct = pred_choice.eq(target0.data).cpu().sum()
                 eval_classify_accu0 = correct.item() / float(batch_size)  # npoints 96
                 eval_classify_accu.append(eval_classify_accu0)
-                # 将本批次的预测标签和真实标签添加到列表中
+                # Add the predicted labels and true labels of this batch to the lists
                 all_pred.extend(pred_choice.cpu().numpy())
                 all_true.extend(target0.cpu().numpy())
-            # 将列表转换为numpy数组
+            # Convert the lists to numpy arrays
             all_pred = np.array(all_pred)
             all_true = np.array(all_true)
 
-            # 定义类别名称
+            # Define the class names
             class_names = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9']
 
-            # # Find unique classes in true labels
-            # unique_classes = np.unique(all_true)
-            # 在真实标签和预测标签中查找独特的类
+            # Find unique classes in the true labels and predicted labels
             unique_classes = np.unique(np.concatenate((all_true, all_pred)))
 
             # Filter class names based on unique classes
             filtered_class_names = [class_names[i] for i in unique_classes]
 
-            # 调用classification_report函数，输出每个类别的评估指标
+            # Call the classification_report function to output evaluation metrics for each class
             report = classification_report(all_true, all_pred, target_names=filtered_class_names)
             with open("report.txt", "a") as file:
                 file.write(report)
@@ -176,7 +174,7 @@ def train_model(num_epochs, learning_rate, batchsize):
             file.close
             # print(report)
 
-            # 计算confusion matrix
+            # Calculate the confusion matrix
             conf_mat = confusion_matrix(all_true, all_pred, labels=unique_classes)
             with open("Confusion_Matrix.txt", "a") as file:
                 file.write(f"Epoch: {epoch}\n")
@@ -198,15 +196,15 @@ def train_model(num_epochs, learning_rate, batchsize):
 
             print('eval_loss: {}'.format(eval_loss))
             print('eval_classify_accu: {}'.format(eval_classify_accu))
-            
-            # 检查验证性能是否提升
+
+            # Check if the validation performance has improved
             if eval_loss < best_validation_loss:
                 best_validation_loss = eval_loss
                 counter = 0
             else:
                 counter += 1
 
-            # # 如果连续多于early_stop_patience个epoch验证性能没有提升，停止训练
+            # If there is no improvement in validation performance for more than early_stop_patience epochs, stop training
             if counter >= early_stop_patience:
                 print(f'Early stopping after {epoch+1} epochs without improvement.')
                 break
@@ -223,7 +221,7 @@ def train_model(num_epochs, learning_rate, batchsize):
 
     end_time = time.time()
 
-    print("训练总时长：{}".format(end_time - start_time))
+    print("Training Times：{}".format(end_time - start_time))
     writer1.close()
     
     state = {'model': model.state_dict(), 'optimizer': optimizer.state_dict(), 'epoch': epoch}

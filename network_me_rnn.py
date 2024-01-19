@@ -52,24 +52,24 @@ class LFPointTransformer(nn.Module):
         selected_points = torch.zeros(batch_size, 96, 5, device=in_mat.device)
 
         for i in range(batch_size):
-            # 取每个点的注意力分数（假设是自注意力的对角线）
-            point_attn = attn[i].diagonal(dim1=-2, dim2=-1)  # 取对角线，得到 [96]            
-            # 将96个点的注意力分数分成96组，每组4个点
+            # Get the attention scores for each point (assuming it's from self-attention's diagonal)
+            point_attn = attn[i].diagonal(dim1=-2, dim2=-1)  # Take the diagonal to get [96]            
+            # Divide the attention scores of 96 points into 96 groups, each with 6 points
             attn_sums = point_attn.view(-1, 6).sum(dim=1)  # [96]
-            # 选出注意力和最高的组的索引
+            # Select the index of the group with the highest sum of attention
             _, max_group_idx = attn_sums.max(dim=0)
-            # 获取对应的点的索引
+            # Get the indices of the points in that group
             group_indices = torch.arange(num_points, device=in_mat.device).view(-1, 6)[max_group_idx]
-            # 获取这组点的坐标
+            # Retrieve the coordinates of this group of points
             group_points = in_mat[i][group_indices]
-            # 计算质心
+            # Calculate the centroid
             centroid = group_points.mean(dim=0)
-            # 计算所有点到质心的距离
-            all_points = in_mat[i][:, :3]  # 只取前三个维度的数据（点云的坐标）
+            # Calculate the distance of all points to the centroid
+            all_points = in_mat[i][:, :3]  # Only take the data from the first three dimensions (the coordinates of the point cloud)
             distances = torch.norm(all_points - centroid[:3], dim=1)
-            # 选择距离最近的16个点
+            # Select the 96 closest points
             _, closest_indices = distances.topk(96, largest=False)
-            # 保存选择的点
+            # Save the selected points
             selected_points[i] = in_mat[i][closest_indices]
         return selected_points
 
@@ -99,7 +99,7 @@ class BasePointTiNet(nn.Module):
         self.caf3 = nn.ReLU()
 
     def forward(self, in_mat): # in_mat:(400, 96, 5) (batchsize * length_size, pc_num_ti, [x,y,z,velocity,intensity])
-        x = in_mat.transpose(1,2)   #转置       # x:(400, 5, 96) point(x,y,z,range,intensity,velocity)
+        x = in_mat.transpose(1,2)   #convert       # x:(400, 5, 96) point(x,y,z,range,intensity,velocity)
 
         x = self.caf1(self.cb1(self.conv1(x)))  # x:(400, 8, 96)
         x = self.caf2(self.cb2(self.conv2(x)))  # x:(400, 16, 96)
@@ -139,7 +139,7 @@ class GlobalPointTiNet(nn.Module):
         x = x.transpose(1,2)   # x:(400, 96, 96)
 
         attn_weights=self.softmax(self.attn(x))   # attn_weights:(400, 96, 1)
-        attn_vec=torch.sum(x*attn_weights, dim=1)  # attn_vec:(400, 96)   * 点乘
+        attn_vec=torch.sum(x*attn_weights, dim=1)  # attn_vec:(400, 96)   * times
         return attn_vec
 
 class GlobalTiRNN(nn.Module):
@@ -196,7 +196,7 @@ class ESP_PCT_Net(nn.Module):
 
     def save(self, name=None):
         """
-        保存模型，默认使用“模型名字+时间”作为文件名
+        Saves the model using the default naming convention of "model_name+timestamp".
         """
         if name is None:
             prefix = 'checkpoints/'
@@ -206,7 +206,7 @@ class ESP_PCT_Net(nn.Module):
 
     def load(self, pathname):
         """
-        加载指定路径的模型
+        Loads the model from a specified path.
         """
         self.load_state_dict(torch.load(pathname))
         

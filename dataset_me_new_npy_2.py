@@ -72,7 +72,7 @@ class Parsing_Pose_PC(Dataset):
         if self.train:
             ti, label = self.data_ti[index], self.classes[self.data_label[index]]
 
-        else:  # test 固定的ti kinect 数据
+        else:  # For testing with fixed ti Kinect data
             ti, label = self.data_test_ti[index], self.classes[self.data_test_label[index]]
 
         return ti, label
@@ -84,7 +84,7 @@ class Parsing_Pose_PC(Dataset):
             return len(self.data_test_ti)
 
     def dataRead(self):  # train
-        # list_all_ti = []  # ti数据
+        # list_all_ti = []  # mmWave Data
         # list_all_label = []  # body label
         # list_all_key2 = []  # joint  point
         if platform.system() == 'Linux':
@@ -126,8 +126,8 @@ class Parsing_Pose_PC(Dataset):
 
 
 if __name__ == '__main__':
-    #batch_size个bag,取25mat，每个mat中含有65×5个点
-    #batch_size个动作，取25帧，每帧中含有64*1的点
+    # For batch_size number of bags, take 25 mats, each containing 65×5 points
+    # For batch_size number of actions, take 25 frames, each frame containing 64*1 points
     train_data = Parsing_Pose_PC()
     train_loader = DataLoader(train_data, batch_size=16, shuffle=True, drop_last=True, num_workers=5)
 
