@@ -45,7 +45,7 @@ def get_bounding_box(points):
     last_zmin, last_zmax = zmin, zmax
     return xmin, xmax, ymin, ymax, zmin, zmax
 
-list_all_ti = []  # ti数据
+list_all_ti = []  # mmWave data
 list_all_label = []  # body label
 list_all_key2 = []  # joint point
 rootdir = r".\matData"
