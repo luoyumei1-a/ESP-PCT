@@ -61,7 +61,7 @@ http://localhost:6006
 ```
 
 ## Train
-- Train ESP-PCT 
+- Train ESP-PCT
 ```
 python train_me.py
 ```
