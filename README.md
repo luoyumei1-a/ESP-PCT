@@ -6,8 +6,7 @@ This is Pytorch implementation of our paper "ESP-PCT: Enhanced VR Semantic Perfo
 
 | Backbone | Accuracy	                | Checkpoints Google Links | Checkpoints Baidu Links                                                 |
 |---|--------------------------|-------------------|-------------------------------------------------------------------------|
-| Point Transformer   | 98.8 (k=96,$\eta$=0.82) | [Google Drive](https://drive.google.com/file/d/17upx88PytEqcdqsSVqTlL9Ic3tKnjdrc/view?usp=sharing) (v599) | [Baidu Drive ](https://pan.baidu.com/s/1u2mJ05NSNJxJ6IJJkU--eg) (v599) |
-
+| Point Transformer   | 98.8 (k=96,$\eta$=0.82) | [Google Drive](https://drive.google.com/file/d/19yV-4ChD2RLsMBLYPeEPjnDua8wJQtbZ/view?usp=sharing) (v599) | [Baidu Drive ](https://pan.baidu.com/s/1k01fexEuOZIGssj_GvlOwQ?pwd=mpjx) (v599) |
 - What are contained in the checkpoints:
 
 ```
