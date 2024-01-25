@@ -1,6 +1,11 @@
 # ESP-PCT: Enhanced VR Semantic Performance  through Efficient Compression of Temporal and Spatial Redundancies in Point Cloud Transformers
 
 This is Pytorch implementation of our paper "ESP-PCT: Enhanced VR Semantic Performance  through Efficient Compression of Temporal and Spatial Redundancies in Point Cloud Transformers".
+## Datasets
+
+| Data Type | Google Links | Baidu Links                                                 |
+|------------------|-------------------|-------------------------------------------------------------------------|
+| mmWave raw IQ, mmWave Point Cloud, Kinect | [Google Drive](https://drive.google.com/drive/folders/1Hk5WnxPbsS_3Ilbs9x-ut50CIZU6m9Ns?usp=sharing) | [Baidu Drive ](https://pan.baidu.com/s/1k01fexEuOZIGssj_GvlOwQ?pwd=mpjx) |
 
 ## Pre-trained Models
 
