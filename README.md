@@ -61,7 +61,7 @@ http://localhost:6006
 ```
 
 ## Train
-- Train LF-ViT on ImageNet 
+- Train ESP-PCT
 ```
 python train_me.py
 ```
