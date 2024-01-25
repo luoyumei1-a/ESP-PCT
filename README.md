@@ -5,13 +5,13 @@ This is Pytorch implementation of our paper "ESP-PCT: Enhanced VR Semantic Perfo
 
 | Data Type | Google Links | Baidu Links                                                 |
 |------------------|-------------------|-------------------------------------------------------------------------|
-| mmWave raw IQ, mmWave Point Cloud, Kinect | [Google Drive](https://drive.google.com/drive/folders/1Hk5WnxPbsS_3Ilbs9x-ut50CIZU6m9Ns?usp=sharing) | [Baidu Drive ](https://pan.baidu.com/s/1k01fexEuOZIGssj_GvlOwQ?pwd=mpjx) |
+| mmWave raw IQ, mmWave Point Cloud, Kinect | [Google Drive](https://drive.google.com/drive/folders/1Hk5WnxPbsS_3Ilbs9x-ut50CIZU6m9Ns?usp=sharing) | [Baidu Drive](https://pan.baidu.com/s/1lbIBcwvK1LpAyI_cy62UUA?pwd=o3g5) |
 
 ## Pre-trained Models
 
 | Backbone | Accuracy	                | Checkpoints Google Links | Checkpoints Baidu Links                                                 |
 |---|--------------------------|-------------------|-------------------------------------------------------------------------|
-| Point Transformer   | 98.8 (k=96,$\eta$=0.82) | [Google Drive](https://drive.google.com/file/d/19yV-4ChD2RLsMBLYPeEPjnDua8wJQtbZ/view?usp=sharing) (v599) | [Baidu Drive ](https://pan.baidu.com/s/1k01fexEuOZIGssj_GvlOwQ?pwd=mpjx) (v599) |
+| Point Transformer   | 98.8 (k=96,$\eta$=0.82) | [Google Drive](https://drive.google.com/file/d/19yV-4ChD2RLsMBLYPeEPjnDua8wJQtbZ/view?usp=sharing) (v599) | [Baidu Drive](https://pan.baidu.com/s/1k01fexEuOZIGssj_GvlOwQ?pwd=mpjx) (v599) |
 - What are contained in the checkpoints:
 
 ```
